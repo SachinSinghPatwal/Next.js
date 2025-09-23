@@ -12,16 +12,19 @@ export default function SignUpPage() {
     username: "",
   });
   const [disableButton, setDisableButton] = useState(true);
-
   const [loading, setLoading] = useState(false);
 
   async function signUp() {
     try {
       setLoading(true);
-      const response = await axios.post("/api/users/signup", user);
+      const response = await axios
+        .post("/api/users/signup", user)
+        .finally(() => {
+          setLoading(false);
+        });
       console.log("signup success", response.data);
       toast.success("Sign up successfully");
-      if (response.data.success) router.push("/login");
+      if (response.data.success) router.push("/verifyEmail");
     } catch (error: any) {
       console.log("failed to signup");
       toast.error(error.message);
