@@ -8,6 +8,8 @@ connection();
 export async function POST(request: NextRequest) {
   // extract data from token
   const userId = await getDataFromToken(request);
+  console.log(userId);
+
   const user = await User.findById(userId).select("-password");
   return NextResponse.json({
     message: "User found",

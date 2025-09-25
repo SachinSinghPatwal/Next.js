@@ -7,24 +7,32 @@ import toast from "react-hot-toast";
 
 export default function ProfilePage() {
   const router = useRouter();
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState("nothing");
   const getUserData = async () => {
-    const res = await axios.get("/api/users/profile");
-    setUserData(res.data.data);
+    try {
+      const res = await axios.post("/api/users/profile");
+      console.log(res);
+      setUserData(res.data.data._id);
+    } catch (error) {
+      console.log(error);
+    }
   };
   const logout = async () => {
-    await axios.post("/api/users/logout");
-    toast.success("Logged out successfully");
-    router.push("/login");
+    try {
+      await axios.post("/api/users/logout");
+      toast.success("Logged out successfully");
+      router.push("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
-
   useEffect(() => {
     getUserData();
   }, []);
   return (
-    <div>
-      <h1>profile page</h1>
-      <h1>
+    <div className="grid items-center justify-center content-center h-screen">
+      <h1 className="text-center">profile page</h1>
+      <h1 className="text-center">
         {userData == "nothing" ? (
           "Nothing"
         ) : (

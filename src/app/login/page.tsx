@@ -52,7 +52,7 @@ export default function Login() {
         <button
           onClick={login}
           disabled={disableButton}
-          className="bg-blue-500 text-white p-2 rounded-lg cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-200"
+          className="bg-blue-500 text-white p-2 rounded-lg cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500"
         >
           login
         </button>
